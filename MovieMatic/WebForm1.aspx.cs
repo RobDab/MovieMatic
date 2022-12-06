@@ -32,8 +32,28 @@ namespace MovieMatic
                 );
             
             AddTicket(currentTicket);
-            //UpdateTicketCount();
+            UpdateTicketCount();
+            ResetFields();
+            
+        }
 
+
+        public static void AddTicket(Ticket ticket)
+        {
+            Ticket.TicketList.Add(ticket);
+            
+        }
+
+        public void ResetFields()
+        {
+            Name.Text = "";
+            Lastname.Text = "";
+            reducedTicket.Checked = false;
+        }
+
+        
+        public void UpdateTicketCount()
+        {
             int TicketNord = 0;
             int TicketNord_ridotto = 0;
             int TicketEst = 0;
@@ -48,15 +68,15 @@ namespace MovieMatic
                     case "Nord":
                         if (TicketNord < 120)
                         {
-                            TicketSud += 1;
+                            TicketNord += 1;
                             if (ticket.Ridotto)
                             {
-                                TicketSud_ridotto += 1;
+                                TicketNord_ridotto += 1;
                             }
 
-                            if (TicketSud == 120)
+                            if (TicketNord == 120)
                             {
-                                SudSoldOut.Visible = true;
+                                NordSoldOut.Visible = true;
                             }
 
                         }
@@ -65,15 +85,15 @@ namespace MovieMatic
                     case "Est":
                         if (TicketEst < 120)
                         {
-                            TicketSud += 1;
+                            TicketEst += 1;
                             if (ticket.Ridotto)
                             {
-                                TicketSud_ridotto += 1;
+                                TicketEst_ridotto += 1;
                             }
 
-                            if (TicketSud == 120)
+                            if (TicketEst == 120)
                             {
-                                SudSoldOut.Visible = true;
+                                EstSoldOut.Visible = true;
                             }
 
                         }
@@ -87,100 +107,19 @@ namespace MovieMatic
                                 TicketSud_ridotto += 1;
                             }
 
-                            if(TicketSud == 3)
+                            if (TicketSud == 3)
                             {
                                 SudSoldOut.Visible = true;
                             }
-                            
+
                         }
                         break;
                 }
-            }
-            LabelSalaNord.Text = $"Disponibili {120 - TicketNord}/120 ticket. Prenotati {TicketNord_ridotto} ridotti.";
-            LabelSalaEst.Text = $"Disponibili {120 - TicketEst}/120 ticket. Prenotati {TicketEst_ridotto} ridotti.";
-            LabelSalaSud.Text = $"Disponibili {120 - TicketSud}/120 ticket. Prenotati {TicketSud_ridotto}  ridotti.";
+            } 
+            LabelSalaNord.Text = $"Disponibili {120 - TicketNord}/120 ticket. Dei quali {TicketNord_ridotto} ridotti.";
+            LabelSalaEst.Text = $"Disponibili {120 - TicketEst}/120 ticket. Dei quali {TicketEst_ridotto} ridotti.";
+            LabelSalaSud.Text = $"Disponibili {120 - TicketSud}/120 ticket. Dei quali  {TicketSud_ridotto}  ridotti.";
             
-
-            Name.Text = "";
-            Lastname.Text = "";
-            reducedTicket.Checked = false;
-        }
-
-
-        public static void AddTicket(Ticket ticket)
-        {
-            Ticket.TicketList.Add(ticket);
-            
-        }
-
-        
-        public static void UpdateTicketCount()
-        {
-
-            //int TicketNord = 0;
-            //int TicketNord_ridotto = 0;
-            //int TicketEst = 0;
-            //int TicketEst_ridotto = 0;
-            //int TicketSud = 0;
-            //int TicketSud_ridotto = 0;
-
-            //foreach (Ticket ticket in Ticket.TicketList)
-            //{
-            //    switch (ticket.Sala)
-            //    {
-            //        case "Nord":
-            //            if (TicketNord < 120)
-            //            {
-            //                TicketNord += 1;
-            //                if (ticket.Ridotto)
-            //                {
-            //                    TicketNord_ridotto += 1;
-            //                }
-            //                break;
-            //            }
-            //            else
-            //            {
-            //                NordSoldOut.Visible = true;
-            //                break;
-            //            }
-
-            //        case "Est":
-            //            if (TicketEst < 120)
-            //            {
-            //                TicketEst += 1;
-            //                if (ticket.Ridotto)
-            //                {
-            //                    TicketEst_ridotto += 1;
-            //                }
-            //                break;
-            //            }
-            //            else
-            //            {
-
-            //                EstSoldOut.Visible = true;
-            //                break;
-            //            }
-            //        case "Sud":
-            //            if (TicketSud < 120)
-            //            {
-            //                TicketSud += 1;
-            //                if (ticket.Ridotto)
-            //                {
-            //                    TicketSud_ridotto += 1;
-            //                }
-            //                break;
-            //            }
-            //            else
-            //            {
-            //                SudSoldOut.Visible = true;
-            //                break;
-            //            }
-            //    }
-            //}
-            //LabelSalaNord.Text = $"Disponibili {120 - TicketNord}/120 ticket. Dei quali {TicketNord_ridotto} ridotti.";
-            //LabelSalaEst.Text = $"Disponibili {120 - TicketEst}/120 ticket. Dei quali {TicketEst_ridotto} ridotti.";
-            //LabelSalaSud.Text = $"Disponibili {120 - TicketSud}/120 ticket. Dei quali  {TicketSud_ridotto}  ridotti.";
-            //Label1.Text = "ciao";
         }
         public class Ticket
         {
